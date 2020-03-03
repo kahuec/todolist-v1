@@ -1,4 +1,2 @@
 language = "nodejs"
 run = "node index.js"
-
-just because
