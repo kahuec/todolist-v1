@@ -43,14 +43,22 @@ app.post("/", function(req, res) {
     // code allows items to be added to the regular list and work list
     let item = req.body.newItem;
     
+    //if route is /work, add to work list
     if (req.body.list === "Work") {
         workItems.push(item);
         res.redirect("/work");
-    } else {
+    } 
+    //if route is /fun, add to fun list
+    else if (req.body.list === "Fun") {
+        funItems.push(item);
+        res.redirect("/fun");
+    } 
+    else {
         items.push(item);
         res.redirect("/");
     }
 });
+    
 
 // display default to do list on the localhost:3000/work route!
 app.get("/work", function(req, res){
