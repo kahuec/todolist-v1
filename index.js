@@ -9,11 +9,11 @@ const date = require(__dirname + "/date.js");
 const app = express();
 
 // set an array for the default items in the list
-let items = ["Buy Food", "Prepare Food", "Cook Food", "Eat Food"];
-// set an empty array for new work items
-let workItems = ["Show Up", "Get Settled"];
-//create new array for fun items
-let funItems = ["Go to the beach", "Go out to dinner"]
+let items = [""];
+// set an empty array for new weekend items
+let weekend = ["Clean House", "Meal Prep"];
+//create new array for weekday items
+let weekday = ["Prioritize", "Go to the gym"]
 
 // set EJS as the viewing engine to display html
 app.set('view engine', 'ejs');
@@ -43,15 +43,15 @@ app.post("/", function(req, res) {
     // code allows items to be added to the regular list and work list
     let item = req.body.newItem;
     
-    //if route is /work, add to work list
-    if (req.body.list === "Work") {
-        workItems.push(item);
-        res.redirect("/work");
+    //if route is /weekend, add to weekend list
+    if (req.body.list === "Weekend") {
+        weekend.push(item);
+        res.redirect("/weekend");
     } 
-    //if route is /fun, add to fun list
-    else if (req.body.list === "Fun") {
-        funItems.push(item);
-        res.redirect("/fun");
+    //if route is /weekday, add to weekday list
+    else if (req.body.list === "Weekday") {
+        weekday.push(item);
+        res.redirect("/weekday");
     } 
     else {
         items.push(item);
@@ -61,12 +61,12 @@ app.post("/", function(req, res) {
     
 
 // display default to do list on the localhost:3000/work route!
-app.get("/work", function(req, res){
-    res.render("list", {listTitle: "Work To Do List", newListItems: workItems})
+app.get("/weekend", function(req, res){
+    res.render("list", {listTitle: "Weekend", newListItems: weekend})
 });
 // display default to do list on the localhost:3000/fun route!
-app.get("/fun", function(req, res){
-    res.render("list", {listTitle: "Fun To Do List", newListItems: funItems})
+app.get("/weekday", function(req, res){
+    res.render("list", {listTitle: "Weekday", newListItems: weekday})
 });
 
 app.listen(3000, function() {
